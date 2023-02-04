@@ -4,6 +4,8 @@ import os
 from pathlib import Path
 import time
 
+mydb = False
+
 # Import .env variables
 from dotenv import load_dotenv
 load_dotenv()
@@ -24,15 +26,17 @@ host = os.environ['MYSQL_HOST']
 database = os.environ['MYSQL_DATABASE']
 user = os.environ['MYSQL_USER']
 password = os.environ['MYSQL_PASSWORD'] 
+port = os.environ['MYSQL_PASSWORD'] 
 additional = False
-if 'ADDITIONAL' in os.environ:
+if 'ADDITIONAL' in os.environ and os.environ['ADDITIONAL'] != '':
         additional = os.environ['ADDITIONAL']
         additional = additional.split("§")
-        if len(additional)%2 !=0 or '' in additional:
+        if len(additional)%2 !=0 :
             print("additional databases must be declare using character § example : user§password")
             sys.exit(1)
 
 def change(sql):
+    global mydb
     try:
         # Instanciando banco 
         instance = mydb.cursor()
@@ -45,6 +49,7 @@ def change(sql):
         print("Error executing changes to database...")
         return False
 def execSQL(sql):
+    global mydb
     try:
         # Instanciando banco 
         instance = mydb.cursor()
@@ -67,9 +72,8 @@ def restoreDatabase(file,database):
         sys.exit(1)
     return True
 
-
 def main():
-    
+    global mydb
     # Let database ready
     mydb = False
     print("waiting to database ready")
@@ -97,7 +101,7 @@ def main():
             sys.exit(1)
             break
         time.sleep(3)
-
+    
     # Getting users from BD
     result = execSQL("select user from mysql.user;")
     users = []
@@ -199,7 +203,8 @@ def main():
     print("all operations executed")
     sys.exit(0)
 
-
+if __name__ == "__main__":
+    main()
 
 
 

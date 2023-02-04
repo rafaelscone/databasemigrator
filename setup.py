@@ -21,7 +21,7 @@ setup(
     long_description_content_type="text/markdown",
     long_description=long_description,
     packages=find_packages(),
-    install_requires=['requests'],
+    install_requires=['dotenv',"mysql.connector==2.2.9"],
     keywords=['database', 'mysql', 'migrator', ],
     entry_points = {
         'console_scripts': ['databasemigrator=migrator.configure:main'],
