@@ -1,42 +1,21 @@
-## About this package
+## This is a utility to help migrator in database
 
-This package is available on https://pypi.org/project/meuip/ , know in your command line your ip, isp, country, asn, region, latitude, longitude, countryCode
+How to run correctly use docker  container. 
 
-Code on github
-https://github.com/rafaelscone/meuip
+https://hub.docker.com/r/rafaelscone/databasemigrator
 
-## Apis this script use 
-- http://ip-api.com/json
-- https://api.myip.com
-- https://api.my-ip.io/ip
-- https://api.ipify.org?format=json
-- https://ipapi.co/json/
+To see more about this code go to github
+https://github.com/rafaelscone/databasemigrator
 
-## How to install 
 
-```bash
-pip3 install meuip
+You must set the enviroments vars
 ```
-
-## How to use
-
-```bash
-meuip --help
-```
-
-You can choose more than one option
-- ip  = to see the ip address
-- isp  = to see the isp provider
-- country  = to see your contry
-- countryCode  = to see your Contry Code
-- city  = to see your city
-- region  = to see your region
-- latitude  = to see your latitude
-- longitude  = to see your longitude
-
-
-```bash
-meuip isp
+MYSQL_HOST: {url_to_host}
+MYSQL_DATABASE: {database_name}
+MYSQL_USER: {user}
+MYSQL_PASSWORD: {password}
+MYSQL_PORT: 3306
+ADDITIONAL: {optional_database@password§other_database@password}
 ```
 
 ### Feel free to send me news, bugs and suggestions to this package

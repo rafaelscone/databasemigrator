@@ -1,1 +1,1 @@
-import meuip.command_line
+import migrator.configure

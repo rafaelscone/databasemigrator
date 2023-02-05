@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 import mysql.connector
 import sys
 import os
@@ -26,7 +27,7 @@ host = os.environ['MYSQL_HOST']
 database = os.environ['MYSQL_DATABASE']
 user = os.environ['MYSQL_USER']
 password = os.environ['MYSQL_PASSWORD'] 
-port = os.environ['MYSQL_PASSWORD'] 
+port = int(os.environ['MYSQL_PORT'] )
 additional = False
 if 'ADDITIONAL' in os.environ and os.environ['ADDITIONAL'] != '':
         additional = os.environ['ADDITIONAL']
@@ -63,7 +64,7 @@ def execSQL(sql):
         print("Error connecting to database...")
         return False
 def restoreDatabase(file,database):
-    code = f'mysql -u{user} -p{password} -h{host} {database} < {file}'
+    code = f'mysql -u{user} --port {port} -p{password} -h{host} {database} < {file}'
     #print(code)
     exec = os.system(code)
 
@@ -74,6 +75,7 @@ def restoreDatabase(file,database):
 
 def main():
     global mydb
+    
     # Let database ready
     mydb = False
     print("waiting to database ready")
@@ -89,6 +91,7 @@ def main():
                 user= user,
                 password= password, 
                 auth_plugin= 'mysql_native_password',
+                port= port
                 #database= database
             )
             enter = False
